@@ -1,0 +1,4 @@
+LD A,B
+IN A,01
+LD B,32
+ORG 180
