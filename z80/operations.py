@@ -1,53 +1,9 @@
 class Operations:
 
-    # u = Assembler()
-    # u.readFile()
-    #
-    # inpSheet = Assembler().assemble()
-    #
-    # instructions = []
-    # arg1 = []
-    # arg2 = []
-    #
-    # flagP = True
-    #
-    # memoir = [0] * 25
-    # ports = [0]*25
-    # registries = [0] * 25
-    #
-    # for i in range(len(inpSheet[0])):
-    #     instructions.append(inpSheet[0][i])
-    #     arg1.append(inpSheet[1][i])
-    #     arg2.append(inpSheet[2][i])
-    # print(instructions)
-    # print(arg1)
-    # print(arg2)
-
-    # insDictionary = Assembler().knew_instructions
-    # regDictionary = Assembler().knew_registers
-    #
-    # print(insDictionary.get("IN"))
-    # print(regDictionary)
-
-    # b = Assembler.
-
-    # hexInpSheet = x.assemble()
-    #
-    # print(inpSheet)
-    #
-    # opSheet = x.given_instructions
-    #
-    # print(opSheet)
-
     def LDR(self, argument1, argument2, storage):
         a = argument1
         b = argument2
         storage[a] = b
-
-    # def LDC(self, argument1, argument2, storage):
-    #     a = argument1
-    #     b = argument2
-    #     storage[b] = storage[a]
 
     def INR(self, port, registries, ports):
          registries[3] = ports[port]
@@ -55,14 +11,8 @@ class Operations:
     def INCR(self, register, regisitries):
         regisitries[register] = regisitries[register] + 1
 
-    # def INCM(self, address, memories):
-    #     memories[address] = memories[address] + 1
-
     def DECR(self, register, regisitries):
         regisitries[register] = regisitries[register] - 1
-
-    # def DECM(self, address, memories):
-    #     memories[address] = memories[address] - 1
 
     def AND(self, register, registries):
         x = registries[register]
@@ -77,6 +27,10 @@ class Operations:
     def CPL(self, register, registries):
         x = registries[register]
         registries[register] = ~x
+
+    def NEG(self, register, registries):
+        x = registries[register]
+        registries[register] = ~x + 1
 
     def XOR(self, register, registries):
         x = registries[register]
@@ -170,35 +124,97 @@ class Operations:
         sum = x + y
         registries[3] = sum
 
-    # def ADDV(self, value, registries):
-    #     y = value
-    #     x = registries[3]
-    #     sum = x + y
-    #     registries[3] = sum
-    #
-    # def ADDM(self, memory, memoir, registries):
-    #     y = memoir[memory]
-    #     x = registries[3]
-    #     sum = x + y
-    #     registries[3] = sum
-
     def SUBR(self, register, registries):
         y = registries[register]
         x = registries[3]
         sum = x - y
         registries[3] = sum
 
-    # def SUBV(self, value, registries):
-    #     y = value
-    #     x = registries[3]
-    #     sum = x - y
-    #     registries[3] = sum
-    #
-    # def SUBM(self, memory, memoir, registries):
-    #     y = memoir[memory]
-    #     x = registries[3]
-    #     sum = x - y
-    #     registries[3] = sum
+    def RLA(self, register, registries):
+
+        binNum = ""
+        digito = []
+        numb = registries[register]
+        digitoNew = []
+        strFinal = ""
+
+        if numb <= 0:
+            return "0"
+            binNum = ""
+        while numb > 0:
+            residuo = int(numb % 2)
+            numb = int(numb / 2)
+            binNum = str(residuo) + binNum
+
+        strNum = binNum
+
+        for j in range(8 - len(strNum)):
+            digito.append(0)
+
+        for digito_string in strNum:
+            digito.append(int(digito_string))
+
+        for i in range(6):
+            digitoNew[i] = digito[i+1]
+
+        digitoNew.append(digito[0])
+
+        for g in range(8):
+            strFinal += str(digitoNew[g])
+
+        binFinal = int(strFinal)
+
+        decimal, i, n = 0, 0, 0
+        while (binFinal != 0):
+            dec = binFinal % 10
+            decimal = decimal + dec * pow(2, i)
+            binFinal = binFinal // 10
+            i += 1
+
+        registries[register] = decimal
+
+    def RRA(self, register, registries):
+
+        binNum = ""
+        digito = []
+        numb = registries[register]
+        digitoNew = []
+        strFinal = ""
+
+        if numb <= 0:
+            return "0"
+            binNum = ""
+        while numb > 0:
+            residuo = int(numb % 2)
+            numb = int(numb / 2)
+            binNum = str(residuo) + binNum
+
+        strNum = binNum
+
+        for j in range(8 - len(strNum)):
+            digito.append(0)
+
+        for digito_string in strNum:
+            digito.append(int(digito_string))
+
+        digitoNew.append(digito[7])
+
+        for i in range(7):
+            digitoNew.append(digito[i])
+
+        for g in range(8):
+            strFinal += str(digitoNew[g])
+
+        binFinal = int(strFinal)
+
+        decimal, i, n = 0, 0, 0
+        while (binFinal != 0):
+            dec = binFinal % 10
+            decimal = decimal + dec * pow(2, i)
+            binFinal = binFinal // 10
+            i += 1
+
+        registries[register] = decimal
 
     def OUT(self, port, ports, registries):
         ports[port] = registries[3]
