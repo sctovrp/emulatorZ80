@@ -5,26 +5,25 @@ from assembler.assembler import Assembler
 
 class Operations:
 
-    u = Assembler()
-    u.readFile()
-
-    inpSheet = Assembler().assemble()
-
-    instructions = []
-    arg1 = []
-    arg2 = []
-
-    flagP = True
-
-    memoir = [0] * 25
-    ports = [0]*25
-    registries = [0] * 25
-
-    for i in range(len(inpSheet[0])):
-        instructions.append(inpSheet[0][i])
-        arg1.append(inpSheet[1][i])
-        arg2.append(inpSheet[2][i])
-
+    # u = Assembler()
+    # u.readFile()
+    #
+    # inpSheet = Assembler().assemble()
+    #
+    # instructions = []
+    # arg1 = []
+    # arg2 = []
+    #
+    # flagP = True
+    #
+    # memoir = [0] * 25
+    # ports = [0]*25
+    # registries = [0] * 25
+    #
+    # for i in range(len(inpSheet[0])):
+    #     instructions.append(inpSheet[0][i])
+    #     arg1.append(inpSheet[1][i])
+    #     arg2.append(inpSheet[2][i])
     # print(instructions)
     # print(arg1)
     # print(arg2)
@@ -45,15 +44,15 @@ class Operations:
     #
     # print(opSheet)
 
-    def LDR(argument1, argument2, storage):
+    def LDR(self, argument1, argument2, storage):
         a = argument1
         b = argument2
         storage[a] = b
 
-    def LDC(argument1, argument2, storage):
-        a = argument1
-        b = argument2
-        storage[b] = storage[a]
+    # def LDC(self, argument1, argument2, storage):
+    #     a = argument1
+    #     b = argument2
+    #     storage[b] = storage[a]
 
     def INR(self, port, registries, ports):
          registries[3] = ports[port]
