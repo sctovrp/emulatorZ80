@@ -24,19 +24,15 @@ class Assembler:
         for i in Assembler.given_instructions:
             split_line = i
             split_line = split_line.split(' ', 1)
-            # print("initial", len(split_line))
             if len(split_line) == 1:
-                # print("split", split_line, len(split_line))
                 list_instructions.append(split_line[0])
                 list_operands1.append(0)
                 list_operands2.append(0)
             elif ',' not in split_line[1]:
-                # print("split", split_line, len(split_line))
                 list_instructions.append(split_line[0])
                 list_operands1.append(split_line[1])
                 list_operands2.append(0)
             elif ',' in split_line[1]:
-                # print("split", split_line, len(split_line))
                 operands = split_line[1].split(',', 1)
                 list_instructions.append(split_line[0])
                 list_operands1.append(operands[0])
@@ -62,8 +58,5 @@ class Assembler:
         final_instructions = bytearray(list_instructions)
         final_operands1 = bytearray(list_operands1)
         final_operands2 = bytearray(list_operands2)
-        # print(list_instructions)
-        # print(list_operands1)
-        # print(list_operands2)
         final_matrix = [final_instructions, final_operands1, final_operands2]
         return final_matrix
