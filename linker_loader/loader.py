@@ -1,5 +1,3 @@
-
-
 class Loader:
     def load(self, machine_code_mem, memory):
         n = len(machine_code_mem[0])

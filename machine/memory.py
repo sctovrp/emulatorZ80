@@ -22,7 +22,7 @@ class Memory:
         return self.memory
 
     def show(self):
-        print('Memory')
+        print('\nMemory')
         for pos, entry in self.memory.items():
             if entry is None:
                 break

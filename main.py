@@ -109,8 +109,7 @@ class Computer:
             elif instruction == 11: # CPL
                 self.Z80.CPL(first_arg, self.registers)
             elif instruction == 12: # NEG
-                self.Z80.NEG()
-                print('Missing')
+                self.Z80.NEG(first_arg, self.registers)
             elif instruction == 13: # AND
                 self.Z80.AND(first_arg, self.registers)
             elif instruction == 14: # OR
@@ -118,29 +117,13 @@ class Computer:
             elif instruction == 15: # XOR
                 self.Z80.XOR(first_arg, self.registers)
             elif instruction == 16: # RLA
-                self.Z80.RLA()
-                print('Missing')
+                self.Z80.RLA(first_arg, self.registers)
             elif instruction == 17: # RRA
-                self.Z80.RRA()
-                print('Missing')
-            elif instruction == 18: # RLCA
-                self.Z80.RLCA()
-                print('Missing')
-            elif instruction == 19: # CP
-                self.Z80.CP()
-                print('Missing')
+                self.Z80.RRA(first_arg, self.registers)
             elif instruction == 20: # SET
                 self.Z80.SET(first_arg, self.registers, second_arg)
-                print('Missing')
             elif instruction == 21: # RESET
                 self.Z80.RESET(first_arg, self.registers, second_arg)
-                print('Missing')
-            elif instruction == 24: # RET
-                self.Z80.RET()
-                print('Missing')
-            elif instruction == 25: # RST
-                self.Z80.RST()
-                print('Missing')
             elif instruction == 26: # HALT
                 self.Z80.HALT()
             elif instruction == 27: # ORG
@@ -150,14 +133,15 @@ class Computer:
 
             index += 3
 
-        #self.memory.show()
-        print(self.registers[3])
+        print('\nRegisters')
+        names = list(knew_registers.keys())
+        for key, value in self.registers.items():
+            print(f'Register {names[key - 1]}: {value}')
 
-    def test(self):
-        self.registers[3] = 10
-        self.registers[4] = 4
-        self.Z80.SUBR(4, self.registers)
-        print(self.registers[3])
+        print('\nPorts')
+        for key, value in self.ports.items():
+            print(f'Port {key}: {value}')
+
 
 
 if __name__ == '__main__':
