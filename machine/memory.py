@@ -1,8 +1,8 @@
 class Memory:
     def __init__(self):
-        self.size_t = 200
+        self.size_t = 256
         self.memory = {}
-        for i in range(200):
+        for i in range(256):
             self.memory[hex(i)] = None
 
     def set(self, hex_code, value):
@@ -18,11 +18,12 @@ class Memory:
     def get_size(self):
         return self.size_t
 
+    def get_memory(self):
+        return self.memory
+
     def show(self):
         print('Memory')
-        index = 0
         for pos, entry in self.memory.items():
-            if not entry:
+            if entry is None:
                 break
-            print(f'{index} {pos} {entry}')
-            index += 1
+            print(f'Position: {pos} \t Value: {entry}')

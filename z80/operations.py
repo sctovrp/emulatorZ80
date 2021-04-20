@@ -55,37 +55,44 @@ class Operations:
         b = argument2
         storage[b] = storage[a]
 
-    def INR(port, register, storage, ports, pflag):
+    def INR(self, port, registries, ports):
+         registries[3] = ports[port]
 
-        ports[port] = storage[register]
-        # if (ports[port] % 2) == 0:
-        #     pflag = True
-        # else:
-        #     pflag = False
-
-    def OUTR(port, register, storage, ports):
-        storage[register] = ports[port]
-
-    def ADDR(register, lista):
-        lista[register] += lista[3]
-
-    def ADDV(additive, lista, lista2 = []):
-        sum = additive + lista[3]
-        lista2.append(sum)
-
-    def INCR(register, regisitries):
+    def INCR(self, register, regisitries):
         regisitries[register] = regisitries[register] + 1
 
-    def INCM(address, memories):
-        memories[address] = memories[address] + 1
+    # def INCM(self, address, memories):
+    #     memories[address] = memories[address] + 1
 
-    def DECR(register, regisitries):
+    def DECR(self, register, regisitries):
         regisitries[register] = regisitries[register] - 1
 
-    def DECM(address, memories):
-        memories[address] = memories[address] - 1
+    # def DECM(self, address, memories):
+    #     memories[address] = memories[address] - 1
 
-    def SET(register, registries, position):
+    def AND(self, register, registries):
+        x = registries[register]
+        y = registries[3]
+        registries[3] = x & y
+
+    def OR(self, register, registries):
+        x = registries[register]
+        y = registries[3]
+        registries[3] = x | y
+
+    def CPL(self, register, registries):
+        x = registries[register]
+        registries[register] = ~x
+
+    def XOR(self, register, registries):
+        x = registries[register]
+        y = registries[3]
+        registries[3] = x ^ y
+
+    def ORG(self, value, registries):
+        registries[1] = value
+
+    def SET(self, register, registries, position):
 
         binNum = ""
         digito = []
@@ -124,7 +131,7 @@ class Operations:
 
         registries[register] = decimal
 
-    def RESET(register, registries, position):
+    def RESET(self, register, registries, position):
 
         binNum = ""
         digito = []
@@ -163,38 +170,55 @@ class Operations:
 
         registries[register] = decimal
 
-    def ADDR(register, registries):
+    def ADDR(self, register, registries):
         y = registries[register]
         x = registries[3]
         sum = x + y
         registries[3] = sum
 
-    def ADDV(value, registries):
-        y = value
-        x = registries[3]
-        sum = x + y
-        registries[3] = sum
+    # def ADDV(self, value, registries):
+    #     y = value
+    #     x = registries[3]
+    #     sum = x + y
+    #     registries[3] = sum
+    #
+    # def ADDM(self, memory, memoir, registries):
+    #     y = memoir[memory]
+    #     x = registries[3]
+    #     sum = x + y
+    #     registries[3] = sum
 
-    def ADDM(memory, memoir, registries):
-        y = memoir[memory]
-        x = registries[3]
-        sum = x + y
-        registries[3] = sum
-
-    def SUBR(register, registries):
+    def SUBR(self, register, registries):
         y = registries[register]
         x = registries[3]
         sum = x - y
         registries[3] = sum
 
-    def SUBV(value, registries):
-        y = value
-        x = registries[3]
-        sum = x - y
-        registries[3] = sum
+    # def SUBV(self, value, registries):
+    #     y = value
+    #     x = registries[3]
+    #     sum = x - y
+    #     registries[3] = sum
+    #
+    # def SUBM(self, memory, memoir, registries):
+    #     y = memoir[memory]
+    #     x = registries[3]
+    #     sum = x - y
+    #     registries[3] = sum
 
-    def SUBM(memory, memoir, registries):
-        y = memoir[memory]
-        x = registries[3]
-        sum = x - y
-        registries[3] = sum
+    def OUT(self, port, ports, registries):
+        ports[port] = registries[3]
+
+    def HALT(self):
+        pass
+
+    def END(self):
+        pass
+
+    def PUSH(self, stack, registers, value):
+        stack.append(value)
+        registers[2] += 1
+
+    def POP(self, stack, registers):
+        stack.pop()
+        registers[2] -= 1

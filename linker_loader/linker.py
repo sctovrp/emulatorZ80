@@ -4,7 +4,7 @@ class Linker:
         assert n <= 200
         free_mem_positions = []
         for index in range(n * 3):
-            free_mem_positions = hex(index)
+            free_mem_positions.append(hex(index))
         result = [free_mem_positions]
         result.extend(machine_code)
         return result
