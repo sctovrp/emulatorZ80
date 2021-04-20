@@ -159,6 +159,7 @@ class Computer:
         self.Z80.SUBR(4, self.registers)
         print(self.registers[3])
 
+
 if __name__ == '__main__':
     e = Computer()
     e.execute()

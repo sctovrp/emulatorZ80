@@ -17,7 +17,7 @@ class Assembler:
             read.append(line.strip())
         Assembler.given_instructions = read
 
-    def assemble(self):
+    def assemble(self, ):
         list_instructions = []
         list_operands1 = []
         list_operands2 = []
