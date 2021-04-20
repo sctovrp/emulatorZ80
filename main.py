@@ -7,4 +7,7 @@ if __name__ == '__main__':
     b = Assembler()
     b.readFile()
     print(b.given_instructions)
-    print(b.assemble())
+    c = b.assemble()
+    print(c)
+    print(type(c))
+
