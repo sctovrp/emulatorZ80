@@ -13,10 +13,10 @@ Emulator of the microprocessor z80 for the programming languages course.
 * Generates relocatable machine code, by changing words into binary numbers.
 * The result of the previous step is saved into a file.
 
-**Linker__loader
+**Linker__loader**
 * Leer las instrucciones ya ensambladas y generar los espacios(direcciones de registros) en memoria para cada instruccion
 * establecer el program counter(Contiene la dirección de la próxima instrucción.) y el stack pointer(Contiene la dirección de la parte superior de la pila. Ver push o pop en el set de instrucciones.)
 
-**Z80 
+**Z80** 
 * hacer la funcionalidad de cada instruccion recibida por el link_loader
 * establecer los registros para las intrucciones
